@@ -1,0 +1,66 @@
+{
+    "generate": 1,
+    "save_location": "./gen",
+    "display": true,
+
+    "subclass_rarities": {
+        "frog": {
+            "a": 35,
+            "b": 30,
+            "c": 20,
+            "d": 10,
+            "e": 5
+        }
+    },
+    
+    "default_rarities": {
+        "common": 60,
+        "rare": 25,
+        "very_rare": 14,
+        "super_rare": 1
+    },
+
+    "custom_rarities": {
+        "background": {
+            "common": 80,
+            "very_rare": 15,
+            "super_rare": 5
+        },
+        
+        "torso": {
+            "none": 95,
+            "super_rare": 5
+        },
+
+        "bottom": {
+            "none": 60,
+            "rare": 30,
+            "very_rare": 10
+        },
+
+        "neck": {
+            "common": 60,
+            "none": 40
+        },
+
+        "forehead": {
+            "none": 95,
+            "super_rare": 5
+        },
+
+        "mouth_accessory": {
+            "common": 60,
+            "none": 40
+        },
+
+        "head_accessory": {
+            "none": 95,
+            "super_rare": 5
+        },
+
+        "sit-able": {
+            "none": 95,
+            "super_rare": 5
+        }
+    }
+}
