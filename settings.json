@@ -1,7 +1,28 @@
 {
-    "generate": 1,
-    "save_location": "./gen",
-    "display": true,
+    "generate": 10,
+    "assets_location": "assets",
+    "save_location": "gen",
+
+    "asset_classes": {
+        "background": {},
+        "frog": {
+            "a": {},
+            "b": {},
+            "c": {},
+            "d": {},
+            "e": {}
+        },
+        "mouth": {},
+        "eyes": {},
+        "hair": {},
+        "torso": {},
+        "bottom": {},
+        "neck": {},
+        "forehead": {},
+        "mouth_accessory": {},
+        "head_accessory": {},
+        "sit-able": {}
+    },
 
     "subclass_rarities": {
         "frog": {
@@ -25,6 +46,14 @@
             "common": 80,
             "very_rare": 15,
             "super_rare": 5
+        },
+
+        "frog/a": {
+           "common": 60,
+           "rare": 25,
+           "very_rare": 14,
+           "super_rare": 1
+
         },
         
         "torso": {

@@ -4,6 +4,7 @@ import os
 import json
 import random
 from tqdm import tqdm
+from collections import OrderedDict
 
 class Generator:
     def __init__(self, args):
@@ -15,6 +16,7 @@ class Generator:
         self.default_rarities = self.args["default_rarities"]
         self.custom_rarities = self.args["custom_rarities"]
         self.subclass_rarities = self.args["subclass_rarities"]
+        self.asset_classes = self.args["asset_classes"]
 
         # make folder for generated assets
         if not os.path.isdir(self.args["save_location"]):
@@ -25,7 +27,7 @@ class Generator:
 
     def get_args(self, filepath):
         with open(filepath) as f:
-            data = json.load(f)
+            data = json.load(f, object_pairs_hook=OrderedDict)
             return data
 
     def run(self):
@@ -33,27 +35,19 @@ class Generator:
         for i in tqdm(range(1, self.args["generate"]+1)):
             self.generate(i)
 
-        # display the first generated image
-        if self.args["display"]:
-            import webbrowser
-            webbrowser.open(f"{self.args['save_location']}/{1}.png")
-
     def generate(self, current):
-        img = self.add_asset("background", None, superimpose=False)
-        img = self.add_asset("frog", img, has_subclass=True)
-        img = self.add_asset("mouth", img)
-        img = self.add_asset("eyes", img)
-        img = self.add_asset("hair", img)
-        img = self.add_asset("torso", img)
-        img = self.add_asset("bottom", img)
-        img = self.add_asset("neck", img)
-        img = self.add_asset("forehead", img)
-        img = self.add_asset("mouth_accessory", img)
-        img = self.add_asset("head_accessory", img)
-        img = self.add_asset("sit-able", img)
+        # create first layer
+        assets_iterable = iter(self.asset_classes.items())
+        first_asset, first_subclass = next(assets_iterable)
+        img = self.add_asset(first_asset, first_subclass, None, superimpose=False)
+
+        # super impose rest of layers
+        for asset_class, subclass in assets_iterable:
+            img = self.add_asset(asset_class, subclass, img)
 
         # save image
-        img.save(f"{self.args['save_location']}/{current}.png")
+        path = os.path.join(self.args['save_location'], f"{current}.png")
+        img.save(path)
 
     def get_rarity(self, asset):
         # set rarities
@@ -80,15 +74,20 @@ class Generator:
                 return subclass
 
 
-    def add_asset(self, asset_class,  img, has_subclass=False, superimpose=True):
-        # get rarity
-        if has_subclass:
+    def add_asset(self, asset_class,  subclass, img, superimpose=True):
+        # handle subclasses
+        if subclass:
+            # randomly choose subclass
             asset_subclass = self.get_subclass(asset_class)
-            rarity = self.get_rarity(f"{asset_class}.{asset_subclass}")
-            path = f"./assets/{asset_class}/{asset_subclass}/{rarity}"
-        else:
-            rarity = self.get_rarity(asset_class)
-            path = f"./assets/{asset_class}/{rarity}"
+            # get subsubclass
+            asset_subsubclass = self.asset_classes[asset_class][asset_subclass]
+            # recurse
+            asset = os.path.join(asset_class, asset_subclass)
+            return self.add_asset(asset, asset_subsubclass, img)
+
+        # get rarity
+        rarity = self.get_rarity(asset_class)
+        path = os.path.join(self.args["assets_location"], asset_class, rarity)
 
         if rarity == "none":
             return img
@@ -102,7 +101,7 @@ class Generator:
 
         # select random asset from rarity class
         asset = random.choice(assets)
-        path = f"{path}/{asset}"
+        path = os.path.join(path, asset)
 
         if not superimpose:
             return Image.open(path)
