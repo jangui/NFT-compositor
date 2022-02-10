@@ -1,7 +1,19 @@
 {
-    "generate": 10,
+    "generate": 10000,
     "assets_location": "assets",
-    "save_location": "gen",
+    "save_location": "generated",
+
+    "incompatible": {
+        "PA6": [ "B7" ],
+        "PB6": [ "B7" ],
+        "PC6": [ "B7" ],
+        "PD6": [ "B7" ],
+        "PE6": [ "B7" ],
+        "A2": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
+        "A3": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
+        "A4": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
+        "A14": [ "PD", "PE", "E5", "E8", "E9", "E11", "A2", "A3", "A4" ]
+    },
 
     "asset_classes": {
         "background": {},
@@ -14,14 +26,14 @@
         },
         "mouth": {},
         "eyes": {},
-        "hair": {},
-        "torso": {},
-        "bottom": {},
-        "neck": {},
         "forehead": {},
+        "hair": {},
+        "sit-able": {},
+        "bottom": {},
+        "torso": {},
+        "neck": {},
         "mouth_accessory": {},
-        "head_accessory": {},
-        "sit-able": {}
+        "head_accessory": {}
     },
 
     "subclass_rarities": {
@@ -43,8 +55,8 @@
 
     "custom_rarities": {
         "background": {
-            "common": 80,
-            "very_rare": 15,
+            "common": 60,
+            "very_rare": 35,
             "super_rare": 5
         },
 

@@ -8,6 +8,8 @@ from collections import OrderedDict
 
 class Generator:
     def __init__(self, args):
+        self.current_assets = set()
+
         # get random seed
         random.seed(os.urandom(10))
 
@@ -36,6 +38,9 @@ class Generator:
             self.generate(i)
 
     def generate(self, current):
+        # reset frog
+        self.current_assets.clear()
+
         # create first layer
         assets_iterable = iter(self.asset_classes.items())
         first_asset, first_subclass = next(assets_iterable)
@@ -73,6 +78,17 @@ class Generator:
             if chance <= r:
                 return subclass
 
+    def non_compatible(self, asset):
+        # check if asset has no incompatibilities
+        if asset not in self.args["incompatible"]:
+            return False
+
+        for incompatible_asset in self.args["incompatible"][asset]:
+            if incompatible_asset in self.current_assets:
+                print(asset, "non compatible w/", incompatible_asset)
+                return True
+
+        return False
 
     def add_asset(self, asset_class,  subclass, img, superimpose=True):
         # handle subclasses
@@ -103,10 +119,20 @@ class Generator:
         asset = random.choice(assets)
         path = os.path.join(path, asset)
 
+        # get asset name w/out file extension
+        asset_basename = asset.split(".")[0]
+
+        # if non compatible add another asset of same class
+        if self.non_compatible(asset_basename):
+            return self.add_asset(asset_class, subclass, img)
+
+        # add the compatible asset to current_asset
+        self.current_assets.add(asset_basename)
+
         if not superimpose:
             return Image.open(path)
 
-        # superimpose asset
+        # superimpose asset to image
         asset_img = Image.open(path)
         img.paste(asset_img, (0,0), asset_img)
         return img
