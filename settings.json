@@ -4,45 +4,39 @@
     "save_location": "generated",
 
     "incompatible": {
-        "PA6": [ "B7" ],
-        "PB6": [ "B7" ],
-        "PC6": [ "B7" ],
-        "PD6": [ "B7" ],
-        "PE6": [ "B7" ],
-        "A2": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
-        "A3": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
-        "A4": [ "M7", "M3", "M5", "M6", "M9", "M11" ],
-        "A14": [ "PD", "PE", "E5", "E8", "E9", "E11", "A2", "A3", "A4" ]
+        "asset4": [ "asset1", "asset2" ],
+        "asset9": [ "asset3" ]
     },
 
     "asset_classes": {
-        "background": {},
-        "frog": {
-            "a": {},
-            "b": {},
-            "c": {},
-            "d": {},
-            "e": {}
+        "layer1": {},
+        "layer2": {
+            "subclass_a": {},
+            "sublass_b": {},
+            "subclass_c": {},
+            "subclass_d": {},
+            "subclass_e": {
+                "subsubclass_a": {},
+                "subsubclass_b": {}
+            }
         },
-        "mouth": {},
-        "eyes": {},
-        "forehead": {},
-        "hair": {},
-        "sit-able": {},
-        "bottom": {},
-        "torso": {},
-        "neck": {},
-        "mouth_accessory": {},
-        "head_accessory": {}
+        "layer3": {},
+        "layer4": {},
+        "layerN": {}
     },
 
     "subclass_rarities": {
-        "frog": {
-            "a": 35,
-            "b": 30,
-            "c": 20,
-            "d": 10,
-            "e": 5
+        "layer2": {
+            "subclass_a": 35,
+            "sublass_b": 30,
+            "subclass_c": 20,
+            "subclass_d": 10,
+            "subclass_e": 5
+        },
+
+        "layer2/subclass_e": {
+            "subsubclass_a": 70,
+            "subsubclass_b": 30
         }
     },
     
@@ -54,54 +48,23 @@
     },
 
     "custom_rarities": {
-        "background": {
-            "common": 60,
-            "very_rare": 35,
-            "super_rare": 5
+        "layer1": {
+            "common": 90,
+            "very_rare": 7.5,
+            "super_rare": 2.5
         },
 
-        "frog/a": {
-           "common": 60,
-           "rare": 25,
-           "very_rare": 14,
-           "super_rare": 1
-
-        },
-        
-        "torso": {
-            "none": 95,
-            "super_rare": 5
+        "layer3": {
+            "common": 80,
+            "rare": 15,
+            "very_rare": 3.5,
+            "super_rare": 1.5
         },
 
-        "bottom": {
-            "none": 60,
-            "rare": 30,
-            "very_rare": 10
-        },
-
-        "neck": {
-            "common": 60,
-            "none": 40
-        },
-
-        "forehead": {
-            "none": 95,
-            "super_rare": 5
-        },
-
-        "mouth_accessory": {
-            "common": 60,
-            "none": 40
-        },
-
-        "head_accessory": {
-            "none": 95,
-            "super_rare": 5
-        },
-
-        "sit-able": {
+        "layer4": {
             "none": 95,
             "super_rare": 5
         }
+
     }
 }

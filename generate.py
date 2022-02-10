@@ -85,7 +85,6 @@ class Generator:
 
         for incompatible_asset in self.args["incompatible"][asset]:
             if incompatible_asset in self.current_assets:
-                print(asset, "non compatible w/", incompatible_asset)
                 return True
 
         return False
