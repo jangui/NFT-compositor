@@ -61,5 +61,5 @@ python3 -m pip install -r requirements.txt
 ### Generate
 ```
 cd <NFT Compositor folder location>
-`python3 generate.py`
+python3 generate.py
 ```
